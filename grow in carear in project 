@@ -1,0 +1,161 @@
+index.html
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🛡️ स्कैम रक्षक प्रो + अजय करियर कवच</title>
+    <!-- Tailwind CSS for Premium Design -->
+    <script src="https://jsdelivr.net"></script>
+    <!-- FontAwesome for Visual Icons -->
+    <link rel="stylesheet" href="https://cloudflare.com">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Poppins', 'Noto Sans Devanagari', sans-serif;
+            background: radial-gradient(circle at top, #1e1b4b, #0f172a, #020617);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .shimmer-effect {
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 100%);
+            background-size: 200% 100%;
+            animation: shimmer 2.5s infinite linear;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+    </style>
+</head>
+<body class="text-slate-200 min-h-screen flex flex-col justify-between items-center p-4 sm:p-6">
+
+    <!-- Top Glow Effect -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-72 h-72 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <!-- Main Container -->
+    <main class="w-full max-w-md glass-card rounded-3xl shadow-2xl p-6 my-auto mt-6 border border-slate-800 relative overflow-hidden">
+        
+        <!-- Header -->
+        <div class="text-center mb-6">
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-tr from-red-500 to-indigo-600 text-white text-2xl shadow-lg shadow-indigo-500/20 mb-3 animate-pulse">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <h1 class="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-red-400 via-indigo-300 to-emerald-400 bg-clip-text text-transparent">
+                स्कैम रक्षक <span class="text-xs font-semibold bg-red-500/20 text-red-400 px-2 py-0.5 rounded-full uppercase border border-red-500/30">PRO</span>
+            </h1>
+            <p class="text-xs text-slate-400 mt-1 font-medium tracking-wide">
+                आपकी अच्छाई की ढाल • धोखाधड़ी से संपूर्ण सुरक्षा
+            </p>
+        </div>
+
+        <!-- Dynamic Scanner Tabs -->
+        <div class="mb-5 bg-slate-950/60 p-1 rounded-xl flex gap-1 border border-slate-800">
+            <button onclick="switchTab('scanner')" id="tab-scanner" class="flex-1 text-center py-2 text-xs font-bold rounded-lg transition-all duration-300 bg-indigo-600 text-white shadow-sm">
+                <i class="fa-solid fa-radar mr-1"></i> एआई स्कैनर
+            </button>
+            <button onclick="switchTab('guidance')" id="tab-guidance" class="flex-1 text-center py-2 text-xs font-bold rounded-lg transition-all duration-300 text-slate-400 hover:text-slate-200">
+                <i class="fa-solid fa-wand-magic-sparkles mr-1"></i> करियर कवच
+            </button>
+        </div>
+
+        <!-- SECTION 1: SCAM SCANNER -->
+        <div id="section-scanner" class="space-y-4">
+            <div class="relative">
+                <label for="scamInput" class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">संदेश या संदिग्ध लिंक पेस्ट करें:</label>
+                <textarea id="scamInput" rows="3" class="w-full bg-slate-950/40 border border-slate-800 rounded-xl p-3 text-sm text-slate-100 placeholder-slate-600 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all resize-none" placeholder="उदा: घर बैठे वीडियो लाइक करके रोज ₹5000 कमाएं या फ्री लैपटॉप योजना का लिंक..."></textarea>
+            </div>
+
+            <!-- Action Button -->
+            <button onclick="processIntelligenceScan()" class="w-full relative overflow-hidden bg-gradient-to-r from-red-600 via-indigo-600 to-indigo-700 font-bold text-sm py-3.5 px-4 rounded-xl hover:opacity-95 shadow-lg shadow-indigo-950/50 transition duration-300 active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2">
+                <div class="absolute inset-0 shimmer-effect pointer-events-none"></div>
+                <i class="fa-solid fa-shield-virus"></i> स्कैम की स्मार्ट जाँच करें
+            </button>
+
+            <!-- Real-time Status Alert Box -->
+            <div id="resultBox" class="hidden rounded-xl p-4 border transition-all duration-500 flex items-start gap-3">
+                <div id="resultIcon" class="text-xl mt-0.5"></div>
+                <div>
+                    <h3 id="resultTitle" class="font-bold text-sm"></h3>
+                    <p id="resultDesc" class="text-xs text-slate-400 mt-0.5 leading-relaxed"></p>
+                </div>
+            </div>
+
+            <!-- Cyber Security Mahamantra -->
+            <div class="bg-slate-950/30 border border-slate-900 rounded-xl p-4 mt-2">
+                <h4 class="text-xs font-bold text-indigo-400 uppercase tracking-wider mb-2 flex items-center gap-1">
+                    <i class="fa-solid fa-circle-exclamation"></i> सुरक्षा के महामंत्र
+                </h4>
+                <ul class="text-xs text-slate-400 space-y-2 list-none pl-0">
+                    <li class="flex items-start gap-2"><i class="fa-solid fa-angle-right text-red-500/70 mt-0.5"></i> जो नौकरी या टास्क के नाम पर ₹1 भी मांगे, वह 100% फ्रॉड है।</li>
+                    <li class="flex items-start gap-2"><i class="fa-solid fa-angle-right text-red-500/70 mt-0.5"></i> कोई भी असली बैंक या अधिकारी कभी फोन पर आपसे OTP या पासवर्ड नहीं मांगता।</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SECTION 2: CAREER KAVACH & horroscope GUIDANCE -->
+        <div id="section-guidance" class="hidden space-y-4 animate-fade-in">
+            <div class="bg-indigo-950/20 border border-indigo-900/40 rounded-xl p-4 text-center">
+                <div class="w-10 h-10 rounded-full bg-indigo-500/10 inline-flex items-center justify-center text-indigo-400 mb-2">
+                    <i class="fa-solid fa-om text-lg"></i>
+                </div>
+                <h3 class="text-sm font-bold text-indigo-300">अजय खाटिक डिजिटल डैशबोर्ड</h3>
+                <p class="text-[11px] text-slate-400 mt-1">ब्रह्मांडीय सकारात्मक ऊर्जा एवं समाज कल्याण मंच</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2 text-[11px]">
+                <div class="bg-slate-950/40 border border-slate-800/60 p-2.5 rounded-lg">
+                    <span class="text-slate-500 block uppercase font-bold tracking-tight">जन्म विवरण</span>
+                    <span class="text-slate-300 font-semibold block mt-0.5">28 नवंबर 2000</span>
+                    <span class="text-slate-400 block">सायं 5:30 | झालावाड़</span>
+                </div>
+                <div class="bg-slate-950/40 border border-slate-800/60 p-2.5 rounded-lg">
+                    <span class="text-slate-500 block uppercase font-bold tracking-tight">कुंडली विश्लेषण</span>
+                    <span class="text-indigo-400 font-semibold block mt-0.5">वृषभ लग्न, धनु राशि</span>
+                    <span class="text-emerald-400 block"><i class="fa-solid fa-bolt-lightning text-[9px]"></i> पुरुषार्थ एवं साहस</span>
+                </div>
+            </div>
+
+            <!-- Rahu Transition Alert Box -->
+            <div class="bg-amber-950/20 border border-amber-900/30 rounded-xl p-3.5 flex gap-3 items-start">
+                <span class="text-amber-500 text-lg mt-0.5"><i class="fa-solid fa-circle-nodes"></i></span>
+                <div>
+                    <h4 class="text-xs font-bold text-amber-400">राहु प्रभाव गोचर संदेश</h4>
+                    <p class="text-[11px] text-slate-400 mt-0.5 leading-relaxed">
+                        वर्तमान में 30-35% तामसिक ऊर्जा सक्रिय होने के कारण मन में हल्का भ्रम, आलस्य या संशय आना स्वाभाविक है। इसे कमजोरी न समझें। **फरवरी 2027 से मई 2027** के बीच आपका पूर्ण ऊर्जा शुद्धिकरण निश्चित है। तब तक कर्म पथ पर टिके रहें।
+                    </p>
+                </div>
+            </div>
+            
+            <p class="text-[10px] text-center text-slate-500 italic">"होइहै सोई जो राम रचि राखा, को करि तर्क बढ़ावै साखा।"</p>
+        </div>
+
+    </main>
+
+    
+    <footer class="w-full text-center mt-6 mb-2 z-10">
+        <p class="text-[11px] text-slate-500 tracking-wider font-semibold">
+            PLATFORM CREATED BY <span class="bg-slate-800 text-slate-300 px-2 py-0.5 rounded-md text-[10px] uppercase font-bold tracking-normal border border-slate-700">AJAY KHATIK</span>
+        </p>
+    </footer>
+
+    <!-- Audio / Visual Alert Logic Script -->
+    <script>
+        function switchTab(tabName) {
+            const scanTab = document.getElementById('tab-scanner');
+            const guideTab = document.getElementById('tab-guidance');
+            const scanSec = document.getElementById('section-scanner');
+            const guideSec = document.getElementById('section-guidance');
+
+            if(tabName === 'scanner') {
+                scanTab.className = "flex-1 text-center py-2 text-xs font-bold rounded-lg transition-all duration-300 bg-indigo-600 text-white shadow-sm";
+                guideTab.className = "flex-1 text-center py-2 text-xs font-bold rounded-lg transition-all duration-300 text-slate-400 hover:text-slate-200";
+                scanSec.classList.remove('hidden');
+                guideSec.classList.add('
