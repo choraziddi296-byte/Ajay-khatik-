@@ -1,0 +1,60 @@
+javascript
+import React, { useState } from 'react';
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
+// अपनी API Key यहाँ डालें (सुरक्षा के लिए इसे .env फ़ाइल में रखना बेहतर होता है)
+const API_KEY = "YOUR_GEMINI_API_KEY_HERE"; 
+const genAI = new GoogleGenerativeAI(API_KEY);
+
+export default function ScamShieldApp() {
+  const [inputText, setInputText] = useState(""); // यूजर का इनपुट स्टोर करने के लिए
+  const [loading, setLoading] = useState(false);  // लोडिंग दिखाने के लिए
+  const [result, setResult] = useState(null);     // AI का जवाब स्टोर करने के लिए
+
+  const checkScamMessage = async () => {
+    if (!inputText.trim()) return alert("कृपया पहले कोई संदेश डालें!");
+
+    setLoading(true);
+    setResult(null);
+
+    try {
+      // Gemini 2.5 Flash मॉडल का इस्तेमाल कर रहे हैं (यह बहुत तेज़ और मुफ़्त है)
+      const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+
+      // AI को सख्त निर्देश (Prompt) देना कि वह कैसे जांच करे
+      const prompt = `
+        तुम एक साइबर सुरक्षा एक्सपर्ट हो जिसका नाम 'स्कैम रक्षक' है। 
+        नीचे दिए गए संदेश का विश्लेषण करो और पता लगाओ कि क्या यह किसी वित्तीय धोखाधड़ी, नकली नौकरी (जैसे टेलीग्राम वीडियो लाइक टास्क), लॉटरी फ्रॉड या ओटीपी स्कैम का हिस्सा है।
+        
+        संदेश: "${inputText}"
+        
+        तुम्हें JSON फॉर्मेट में जवाब देना है जिसका स्ट्रक्चर बिल्कुल ऐसा होना चाहिए:
+        {
+          "status": "RED" (अगर पक्का स्कैम है) या "YELLOW" (अगर संदिग्ध है) या "GREEN" (अगर पूरी तरह सुरक्षित है),
+          "reason": "बिल्कुल सरल हिंदी या हिंग्लिश में 1 या 2 लाइन में कारण समझाओ कि यह क्यों स्कैम है या क्यों सुरक्षित है।"
+        }
+        
+        जवाब में JSON के अलावा कुछ और मत लिखना।
+      `;
+
+      const response = await model.generateContent(prompt);
+      const textResult = response.response.text();
+      
+      // AI के जवाब (JSON) को ऑब्जेक्ट में बदलना
+      const jsonResponse = JSON.parse(textResult.trim());
+      setResult(jsonResponse);
+
+    } catch (error) {
+      console.error("Error checking scam:", error);
+      alert("जांच करने में कुछ दिक्कत आई, कृपया दोबारा कोशिश करें।");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    // यहाँ आपका यूआई (UI) रहेगा जिसे आप इन फंक्शन्स से जोड़ेंगे:
+    // 1. आपके <textarea> में onChangeText={setInputText} और value={inputText} लगेगा।
+    // 2. आपके "स्कैम की जाँच करें" बटन में onPress={checkScamMessage} लगेगा।
+  );
+}
