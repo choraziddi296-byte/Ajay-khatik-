@@ -1,4 +1,4 @@
-javascript
+jijavascript
 import React, { useState } from 'react';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
@@ -57,4 +57,29 @@ export default function ScamShieldApp() {
     // 1. आपके <textarea> में onChangeText={setInputText} और value={inputText} लगेगा।
     // 2. आपके "स्कैम की जाँच करें" बटन में onPress={checkScamMessage} लगेगा।
   );
-}
+}{loading && <Text style={{ textAlign: 'center', marginTop: 10 }}>🤖 एआई संदेश की जांच कर रहा है...</Text>}
+
+{result && (
+  <View style={{
+    marginTop: 20,
+    padding: 16,
+    borderRadius: 12,
+    // स्टेटस के हिसाब से बैकग्राउंड कलर बदलना
+    backgroundColor: result.status === 'RED' ? '#FCECE9' : result.status === 'YELLOW' ? '#FFF9E6' : '#EAF7ED',
+    borderWidth: 1,
+    borderColor: result.status === 'RED' ? '#C84B31' : result.status === 'YELLOW' ? '#F3B300' : '#2E7D32'
+  }}>
+    <Text style={{ 
+      fontSize: 18, 
+      fontWeight: 'bold', 
+      // स्टेटस के हिसाब से टेक्स्ट का रंग बदलना
+      color: result.status === 'RED' ? '#BC3908' : result.status === 'YELLOW' ? '#B5651D' : '#1B5E20' 
+    }}>
+      {result.status === 'RED' ? '🔴 सावधान: यह फ्रॉड है!' : result.status === 'YELLOW' ? '🟡 चेतावनी: संदिग्ध संदेश!' : '🟢 सुरक्षित लग रहा है'}
+    </Text>
+    
+    <Text style={{ marginTop: 8, color: '#2C2824', fontSize: 14 }}>
+      {result.reason}
+    </Text>
+  </View>
+)}
